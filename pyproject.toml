@@ -6,6 +6,10 @@ authors = ["Val Melev <val.melev99@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+Flask = "^2.0.2"
+SQLAlchemy = "^1.4.28"
+Flask-SQLAlchemy = "^2.5.1"
+notebook = "^6.4.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
