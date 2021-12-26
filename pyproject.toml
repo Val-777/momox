@@ -5,14 +5,14 @@ description = ""
 authors = ["Val Melev <val.melev99@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-Flask = "^2.0.2"
-SQLAlchemy = "^1.4.28"
-Flask-SQLAlchemy = "^2.5.1"
+python = "=3.9.9"
+Flask = "=2.0.2"
+SQLAlchemy = "=1.4.28"
+Flask-SQLAlchemy = "=2.5.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "=5.2"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core=1.0.4"]
 build-backend = "poetry.core.masonry.api"
