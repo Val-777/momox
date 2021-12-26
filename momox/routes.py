@@ -7,6 +7,10 @@ from app import db
 from momox.models import Shelf, Book
 
 
+# This is a bit messy, I'd put the routes for the different models in their own modules and also
+# slim down handler logic to minimum by using `backend.py` modules
+
+
 @app.route('/shelves', methods=['POST'])
 def shelves_post():
     shelf = Shelf()

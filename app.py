@@ -21,7 +21,7 @@ def create_app():
     db.init_app(app)
 
     with app.app_context():
-        from momox import routes  # Import routes
+        from momox import routes  # Register routes
         db.create_all()
 
         return app

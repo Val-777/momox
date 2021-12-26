@@ -26,7 +26,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project contains a small Flask application that connects to a sqlite database file and exposes REST endpoints.
+This project contains a small Flask application that connects to a SQLite database file and exposes REST endpoints.
 
 This is a minimal project and does not contain any validation or tests.
 
@@ -35,6 +35,7 @@ This is a minimal project and does not contain any validation or tests.
 ### Built With
 
 * [Flask](https://flask.palletsprojects.com/)
+* [SQLite](https://www.sqlite.org)
 * [SQLAlchemy](https://www.sqlalchemy.org//)
 * [poetry](https://python-poetry.org/)
 
@@ -64,18 +65,22 @@ This is a minimal project and does not contain any validation or tests.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-- `POST` routes:
-  - `POST` `/shelves`: creates a shelf
-    - body:
-      no body
-  - `POST` `/books`: creates a book
-    - body: 
-      ```json
-      {"name": "book_name",
-      "shelf_id": 7}
-      ```
+- `POST` `/shelves`: creates a shelf
+  - body:
+    no body
+- `POST` `/books`: creates a book, `price` and `shelf_id` are optional
+  - body: 
+    ```json
+    {
+    "price": 45,
+    "name": "War and Peace",
+    "shelf_id": 7
+    }
+    ```
+- `GET` `shelf/<id>` & `GET` `book/<id>`: Get book / shelf by ID
+- `PATCH` `book/<id>`: Change `name`, `price` and/or `shelf_id` of a book by ID
+- `DELETE` `shelf/<id>` & `DELETE` `book/<id>`: Delete book / shelf by ID, deleting a shelf deletes the books it contains
 
-## Examples
 
 
 <!-- CONTACT -->
