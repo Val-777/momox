@@ -39,7 +39,7 @@ def books_post():
     )
 
 
-@app.route('/shelf/<_id>', methods=['GET'])
+@app.route('/shelf/<int:_id>', methods=['GET'])
 def shelf_get(_id):
     shelf = Shelf.query.get(_id)
 
@@ -52,7 +52,7 @@ def shelf_get(_id):
         abort(404)
 
 
-@app.route('/book/<_id>', methods=['GET'])
+@app.route('/book/<int:_id>', methods=['GET'])
 def book_get(_id):
     book = Book.query.get(_id)
 
@@ -65,7 +65,7 @@ def book_get(_id):
         abort(404)
 
 
-@app.route('/book/<_id>', methods=['PATCH'])
+@app.route('/book/<int:_id>', methods=['PATCH'])
 def book_patch(_id):
     book = Book.query.get(_id)
 
@@ -82,6 +82,24 @@ def book_patch(_id):
 
         return app.response_class(
             response=json.dumps(book.as_dict()),
+            mimetype='application/json'
+        )
+    else:
+        abort(404)
+
+
+@app.route('/book/<int:_id>', methods=['DELETE'])
+def book_delete(_id):
+    book = Book.query.get(_id)
+
+    if book:
+
+        Book.query.filter_by(id=_id).delete()
+        db.session.commit()
+
+        return app.response_class(
+            response='',
+            status=204,
             mimetype='application/json'
         )
     else:
