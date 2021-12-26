@@ -9,7 +9,8 @@ from momox.models import Shelf, Book
 
 @app.route('/shelves', methods=['POST'])
 def shelves_post():
-    shelf = Shelf(books=request.json.get('books', []))
+    # Request validation happening here
+    shelf = Shelf()
     db.session.add(shelf)
     db.session.commit()
 
@@ -22,10 +23,11 @@ def shelves_post():
 
 @app.route('/books', methods=['POST'])
 def books_post():
+    # Request validation happening here
     book = Book(
-        price=request.json.get('price', None),
+        price=request.json.get('price'),
         name=request.json.get('name'),
-        shelf_id=request.json.get('shelf_id', None),
+        shelf_id=request.json.get('shelf_id', None)
     )
     db.session.add(book)
     db.session.commit()

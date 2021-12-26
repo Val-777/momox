@@ -32,5 +32,6 @@ class Book(db.Model):
             "id": self.id,
             "price": self.price,
             "name": self.name,
-            "shelf_id": self.shelf_id
+            "shelf_id": self.shelf_id,
+            "status": self.status
         }
