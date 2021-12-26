@@ -11,7 +11,7 @@ class Shelf(db.Model):
     def as_dict(self):
         return {
             "id": self.id,
-            "books": self.books
+            "books": [book.as_dict() for book in self.books]  # or just IDs
         }
 
 

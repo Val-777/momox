@@ -1,6 +1,6 @@
 import json
 
-from flask import request
+from flask import request, abort
 from flask import current_app as app
 
 from app import db
@@ -37,3 +37,29 @@ def books_post():
         status=201,
         mimetype='application/json'
     )
+
+
+@app.route('/shelf/<_id>', methods=['GET'])
+def shelf_get(_id):
+    shelf = Shelf.query.get(_id)
+
+    if shelf:
+        return app.response_class(
+            response=json.dumps(shelf.as_dict()),
+            mimetype='application/json'
+        )
+    else:
+        abort(404)
+
+
+@app.route('/book/<_id>', methods=['GET'])
+def book_get(_id):
+    book = Book.query.get(_id)
+
+    if book:
+        return app.response_class(
+            response=json.dumps(book.as_dict()),
+            mimetype='application/json'
+        )
+    else:
+        abort(404)
