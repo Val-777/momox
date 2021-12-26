@@ -63,3 +63,26 @@ def book_get(_id):
         )
     else:
         abort(404)
+
+
+@app.route('/book/<_id>', methods=['PATCH'])
+def book_patch(_id):
+    book = Book.query.get(_id)
+
+    if book:
+        if 'price' in request.json.keys():
+            book.price = request.json.get('price')
+        if 'name' in request.json.keys():
+            book.name = request.json.get('name')
+        if 'shelf_id' in request.json.keys():
+            book.shelf_id = request.json.get('shelf_id')
+
+        db.session.add(book)
+        db.session.commit()
+
+        return app.response_class(
+            response=json.dumps(book.as_dict()),
+            mimetype='application/json'
+        )
+    else:
+        abort(404)
