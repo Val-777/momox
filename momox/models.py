@@ -6,7 +6,7 @@ from app import db
 
 class Shelf(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    books = db.relationship('Book', backref='shelf.id', lazy=True)
+    books = db.relationship('Book', cascade="all,delete", backref='shelf.id', lazy=True)
 
     def as_dict(self):
         return {

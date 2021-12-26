@@ -9,7 +9,6 @@ from momox.models import Shelf, Book
 
 @app.route('/shelves', methods=['POST'])
 def shelves_post():
-    # Request validation happening here
     shelf = Shelf()
     db.session.add(shelf)
     db.session.commit()
@@ -23,7 +22,6 @@ def shelves_post():
 
 @app.route('/books', methods=['POST'])
 def books_post():
-    # Request validation happening here
     book = Book(
         price=request.json.get('price'),
         name=request.json.get('name'),
@@ -93,12 +91,26 @@ def book_delete(_id):
     book = Book.query.get(_id)
 
     if book:
-
-        Book.query.filter_by(id=_id).delete()
+        db.session.delete(book)
         db.session.commit()
 
         return app.response_class(
-            response='',
+            status=204,
+            mimetype='application/json'
+        )
+    else:
+        abort(404)
+
+
+@app.route('/shelf/<int:_id>', methods=['DELETE'])
+def shelf_delete(_id):
+    shelf = Shelf.query.get(_id)
+
+    if shelf:
+        db.session.delete(shelf)
+        db.session.commit()
+
+        return app.response_class(
             status=204,
             mimetype='application/json'
         )
